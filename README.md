@@ -1,6 +1,6 @@
 # drawing-screen-webrtc
 
-#### Languages used in this projects: ReactJS, style component, socket io, canvas
+#### Languages used in this projects: NodeJS, WebRTC, Socket,Io, Express, Reat JS
 
 #### The demo will be run on localhost port 3000
 Build root app dependencies
