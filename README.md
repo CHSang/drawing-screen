@@ -3,7 +3,7 @@
 #### Languages used in this projects 
 
 ```
-NodeJS, WebRTC, Socket,Io, Express, Reat JS, PeerJS
+NodeJS, WebRTC, SocketIo, Express, React JS, PeerJS
 ```
 
 #### The demo will be run on localhost port 3000
