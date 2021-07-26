@@ -3,14 +3,30 @@ import styled from "styled-components";
 export const CanvasStyled = styled.canvas`  
   border: 1px solid white;
 `
-
 export const WrapperStyled = styled.div`  
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background-color: #242f41;
-  color: white;
+    background-color: #242f41;
+    color: white;
+
+  .content {
+    display: flex;
+    flex-direction: row;
+
+    .left {
+      display: flex;
+      flex-direction: column;
+
+      .footer {
+        margin-bottom: 10px;
+      }
+    }
+
+    .right {
+      margin-left:20px;
+    }
+  }
 
   .header {
     background-color: #161d29;

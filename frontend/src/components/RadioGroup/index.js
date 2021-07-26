@@ -2,7 +2,7 @@ import { RadioGroupWrapper } from "./Style";
 
 const RadioGroup = ({ title, groupName, data, onChange, selectedItem }) => {
   return (
-    <RadioGroupWrapper onChange={onChange}>
+    <RadioGroupWrapper>
       <label>{title}</label>
       {data.map((item, index) => (
         <div key={index + item.label}>
@@ -11,6 +11,7 @@ const RadioGroup = ({ title, groupName, data, onChange, selectedItem }) => {
             value={item.value}
             name={groupName}
             checked={selectedItem === item.value}
+            onChange={onChange}
           />
           <label>{item.label}</label>
         </div>
