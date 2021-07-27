@@ -2,18 +2,17 @@ import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import { CanvasStyled, WrapperStyled } from "./Styled";
 import ColorPicker from "../../components/ColorPicker";
+import VideoCall from "../../components/VideoCall";
 import PaintingBrush from "../../components/PaintingBrush";
 import useMousePosition from "../../hooks/useMousePosition";
 import useKeyDown from "../../hooks/useKeyDown";
 import { draw } from "../../utils";
-import VideoCall from "../VideoCall";
-
 const { v4: uuidv4 } = require("uuid");
 const socket = io.connect("http://localhost:5000/");
 export const CANVAS_WIDTH = 1100;
 export const CANVAS_HEIGHT = 500;
 
-function DrawScreen() {
+function DrawScreen({ roomId }) {
   const canvasRef = useRef(null);
   const [canvasContext, setCanvasContext] = useState(null);
   const [option, setOption] = useState({
@@ -33,7 +32,11 @@ function DrawScreen() {
   }, [canvasRef]);
 
   useEffect(() => {
-    socket.emit("join-room", uuidv4());
+    if (!roomId) {
+      return;
+    }
+    console.log("room id in draw" + roomId);
+    socket.emit("join-room", roomId, uuidv4());
     socket.on("send-message", (message) => {
       if (message) {
         handleDraw(message);
@@ -52,7 +55,7 @@ function DrawScreen() {
         .getContext("2d")
         .clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     });
-  }, []);
+  }, [roomId]);
 
   const handleDraw = (element) => {
     if (canvasRef && canvasRef.current) {
@@ -60,10 +63,11 @@ function DrawScreen() {
     }
   };
 
-  const handleChange = (event, key) => {
+  const handleOptionChangeHandler = (event, key) => {
     let newOption = { ...option, [key]: event.target.value };
     setOption(newOption);
   };
+
   return (
     <WrapperStyled>
       <div className="header">
@@ -78,17 +82,19 @@ function DrawScreen() {
           />
           <div className="footer">
             <PaintingBrush
-              onChange={(event) => handleChange(event, "brushType")}
+              onChange={(event) =>
+                handleOptionChangeHandler(event, "brushType")
+              }
               selectedItem={option.brushType}
             />
             <ColorPicker
-              onChange={(event) => handleChange(event, "color")}
+              onChange={(event) => handleOptionChangeHandler(event, "color")}
               selectedItem={option.color}
             />
           </div>
         </div>
         <div className="right">
-          <VideoCall />
+          <VideoCall roomId={roomId} />
         </div>
       </div>
     </WrapperStyled>

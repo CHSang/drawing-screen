@@ -24,7 +24,7 @@ export const WrapperStyled = styled.div`
     }
 
     .right {
-      margin-left:20px;
+      margin-left: 45px;
     }
   }
 

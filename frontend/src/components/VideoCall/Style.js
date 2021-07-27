@@ -30,25 +30,22 @@ export const WrapperStyled = styled.div`
       font-size: 15px;
       padding: 10px;
 
-      .command_button {
+      .icon {
         display: flex;
-        background: blue;
-        padding: 10px;
-        border-radius: 10px;
-        width: 20px;
-        height: 20px;
+        width: 25px;
+        height: 25px;
         margin-right: 10px;
         justify-content: center;
         align-items: center;
       }
     }
 
-    .video_wapper {
+    .video_section {
       display: flex;
       flex-direction: column;
       border-bottom-style: solid;
 
-      .my-video {
+      .video-container {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
